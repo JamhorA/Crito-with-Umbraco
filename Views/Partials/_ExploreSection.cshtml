@@ -1,0 +1,70 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+
+<!-- explore-section -->
+<div class="explore-section">
+    <div class="container">
+        <div class="partner">
+            @{
+                var partnerImages = Model.Value<IEnumerable<MediaWithCrops>>("partnerImages");
+                foreach(var entry in partnerImages)
+                {
+                    <img src="@entry.MediaUrl()" alt="">
+                }
+            }
+        </div>
+        <div class="features">
+            <div class="items">
+                <div class="features-item">
+                    <span>@Model.Value("serviceFeaturesSectionTitle")</span>
+                    <div class="title">
+                        @Model.Value("serviceFeaturesHeading")
+                    </div>
+                    <div class="btn">
+                            <form action="@Model.Value("serviceFeaturesButtonUrl")">
+                                <button class="learn-btn">@Model.Value("serviceFeaturesButtonText")<i class="fa-solid fa-arrow-up"></i></button>
+                            </form>
+                    </div>
+                </div>
+                <div class="features-boxes">
+                    @Html.GetBlockListHtml(Model.ServiceFeatures)
+                </div>
+
+            </div>
+
+        </div>
+        <div class="about-company">
+            <div class="about-left-item">
+                <div class="image">
+                    @{
+                        var aboutImage = Model.Value<MediaWithCrops>("aboutCompanySectionImage");
+                        if(aboutImage != null)
+                        {
+                            <img src="@aboutImage.MediaUrl()" alt="@Model.Value("aboutCompanySectionHeading")">
+                        }
+                    }
+                    
+                </div>
+                <div class="content">
+                    <div class="title">@Model.Value("aboutCompanySectionImageTitle") <span>@Model.Value("aboutCompanySectionImageSpanTitle")</span></div>
+                    <p>"@Model.Value("aboutCompanySectionImageDescription")"</p>
+                </div>
+            </div>
+            <div class="about-right-item">
+                <span>@Model.Value("aboutCompanySectionTitle")</span>
+                <div class="title">@Model.Value("aboutCompanySectionHeading")</div>
+                <div class="text">
+                    <p>@Model.Value("aboutCompanySectionDescription")</p>
+                    <!--<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore magni accusantium nihil sit dolorem quia delectus maxime magnam.</p>-->
+                </div>
+                <div class="btn">
+                    <button class="l-btn">@Model.Value("aboutCompanySectionButtonText")<i class="fa-solid fa-arrow-up"></i></button>
+                    <div class="r-btn"><i class="fa-solid fa-play"></i>Intro video</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

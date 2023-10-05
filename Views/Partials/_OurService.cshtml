@@ -1,0 +1,22 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+<!-- our service section -->
+<div class="our-service">
+    <div class="container">
+        <div class="title-service">
+            <span>Our Service</span>
+            <div class="title">
+                We Provide The Best Service For Consulting
+            </div>
+        </div>
+        <div class="content">
+        @Html.GetBlockListHtml(Model.OurService)
+        </div>
+        <div class="btn">
+            <button>Browse Service<i class="fa-solid fa-arrow-up"></i></button>
+        </div>
+    </div>
+</div>

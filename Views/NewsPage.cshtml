@@ -1,0 +1,91 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.NewsPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "_LayoutWithBreadcrumb.cshtml";
+
+    var itemsPerPage = 9;
+    var pageNumber = 1;
+
+    if (!int.TryParse(Context.Request.Query["page"], out pageNumber))
+        pageNumber = 1;
+
+    var selection = Umbraco?.Content(Guid.Parse("0a12128b-029d-4cd2-83b6-28371bfb2cd3"))?
+    .ChildrenOfType("newsItemPage")?
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate).ToList();
+
+    
+    var totalItems = selection?.Count() ?? 1;
+    var pagedItems = selection?.Skip((pageNumber - 1) * itemsPerPage).Take(itemsPerPage);    
+    
+}
+
+    <!-- article & news section -->
+    <div class="article">
+        <div class="container">
+            <div class="header">
+                <div class="item">
+                    <div class="title">Get Every Single Aticle & News</div>
+                </div>
+            </div>
+            <div class="body">
+                <div class="items">
+                    	@foreach (var item in pagedItems)
+                    	{
+                    	var  url = item.Url();
+                    	var  date = item.CreateDate;
+                    	var image = item.Value<IPublishedContent>("newsImage");
+                    	var category = item.Value("newsCategory");
+                    	var title = item.Name();
+                    	var preamble = item.Value("newsPreamble");
+                    	
+                            <a href="@url" class="item" style="text-decoration: none; color: inherit;">
+                                <div class="image">
+                                    <img src="@image.Url()" alt="">
+                                    <div class="date">
+                                        <span class="number">@date.ToString("dd")</span>
+                                        <span class="month">@date.ToString("MMM")</span>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <span>@category</span>
+                                    <div class="title">@title</div>
+                                    <p class="text">@preamble</p>
+                                </div>
+                            </a>
+                    	}
+                </div>
+            </div>
+        </div>
+        <div class="slider-container">
+            @if(pageNumber > 1) 
+            {
+                <a href="?page=@(pageNumber - 1)" style="text-decoration: none;color: inherit;">
+                    <i class="fas fa-arrow-left slider-arrow" id="prev-arrow"></i>
+                </a>
+                
+            }
+            
+            
+                @for (int i = 1; i <= Math.Ceiling((decimal)totalItems / itemsPerPage); i++)
+                {
+                    if(i == pageNumber)
+                    {
+                        <a href="#" class="active" style="text-decoration: none;">@i</a>
+                    }
+                    else
+                    {
+                        <a href="?page=@i" class="" style="text-decoration: none;">@i</a>
+                    }
+                }
+            
+            @if (pageNumber < Math.Ceiling((decimal)totalItems / itemsPerPage)) 
+            {
+                <a href="?page=@(pageNumber + 1)" style="text-decoration: none;color: inherit;">
+                    <i class="fas fa-arrow-right slider-arrow" id="next-arrow"></i>
+                </a>
+            }
+            
+        </div>
+    </div>

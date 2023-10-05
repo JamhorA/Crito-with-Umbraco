@@ -1,0 +1,67 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+<!-- choose us section -->
+<div class="choose-us">
+    <div class="container">
+        <div class="consulting-agency">
+            <div class="image">
+                <div class="img">
+                    <img src="~/images/amy-hirschi-K0c8ko3e6AA-unsplash.jpg" alt="">
+                </div>
+                <div class="bg"></div>
+            </div>
+            <div class="content">
+                <div class="header">
+                    <span>Why Choose Us</span>
+                    <div class="title">Why We Are The Best Business Consulting Agency</div>
+                </div>
+                <div class="body">
+                 @Html.GetBlockListHtml(Model.ChooseUs)
+                </div>
+            </div>
+        </div>
+        <div class="our-projacts">
+            <div class="header">
+                <div>
+                    <span>Project & Case Studies</span>
+                </div>
+                <div class="title">Let's Looks Our Global Projects</div>
+            </div>
+            <div class="items">
+                <div class="item">
+                    <img src="images/adeolu-eletu-E7RLgUjjazc-unsplash.jpg" alt="">
+                    <div class="title">Grow your business</div>
+                    <div class="btn">
+                        <button>Read More<i class="fa-solid fa-arrow-up"></i></button>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="images/marek-levak-zANXcXyByos-unsplash.jpg" alt="">
+                    <div class="title">Why your client needs a responsive website</div>
+                    <div class="btn">
+                        <button>Read More<i class="fa-solid fa-arrow-up"></i></button>
+                    </div>
+                </div>
+                <div class="item"> <img src="images/oli-dale-xjSkI_seiZY-unsplash.jpg" alt="">
+                    <div class="title">Educate your employees to get better results</div>
+                    <div class="btn">
+                        <button>Read More<i class="fa-solid fa-arrow-up"></i></button>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="images/carlos-muza-hpjSkU2UYSU-unsplash.jpg" alt="">
+                    <div class="title">Business Insights is a important piece of your business</div>
+                    <div class="btn">
+                        <button>Read More<i class="fa-solid fa-arrow-up"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="btn">
+                <button class="project-btn">All Recent Projects<i class="fa-solid fa-arrow-up"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

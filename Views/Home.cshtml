@@ -1,0 +1,20 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+@{
+
+	Layout = "_Layout.cshtml";
+	ViewData["PageTitle"] = @Model.Value("pageTitle");
+	ViewData["PageDescription"] = @Model.Value("pageDescribtion");
+	ViewData["PageKeywords"] = @Model.Value("pageKeywords");
+}
+
+<!--<h1>@ViewData["Title"]</h1>-->
+@await Html.PartialAsync("_Showcase")
+@await Html.PartialAsync("_ExploreSection")
+@await Html.PartialAsync("_OurService")
+@await Html.PartialAsync("_ChooseUs")
+@await Html.PartialAsync("_MemberSection")
+@await Html.PartialAsync("_ArticleNewSection")
+@await Html.PartialAsync("_SubscribeSection")

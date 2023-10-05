@@ -1,0 +1,85 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.NewsItemPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Services;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@inject IUserService UserService;
+@{
+	Layout = "_LayoutWithBreadcrumb.cshtml";
+	var userService = UserService;
+	
+	var image = Model.Value<IPublishedContent>("newsImage");
+}
+<!-- details section -->
+<div class="details">
+    <div class="container">
+        <div class="header">
+            <div class="title">@Model.Name</div>
+            <div class="publishing">
+                <div class="date">@Model.CreateDate.ToString("MMM dd, yyyy")</div>
+                <div class="light"></div>
+                <div class="category">@Model.Value("newsCategory")</div>
+                <div class="light"></div>
+                <div class="author">@Model.CreatorName(userService)</div>
+            </div>
+        </div>
+        <div class="article">
+            <div class="content">
+                <div class="image">
+                    <img src="@image.Url()" alt="">
+                </div>
+                <div class="text">
+                    @Model.Value("newsContent")
+                </div>
+                <div class="tags">
+                    @foreach(var tag in Model.Value<IEnumerable<string>>("newsTags"))
+                    {
+                        <div class="tag"><a href="">@tag</a></div>
+                    }
+                    
+                </div>
+            </div>
+            <div class="find-posts">
+                <div class="search">
+                    <input type="text" placeholder="Type to search...">
+                    <div class="icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="recent">
+                    <div class="header-title">Recent Posts</div>
+                    <div class="posts">
+                        <div class="item">
+                            <div class="title">How To Blow Through Capital At An Incredible Rate</div>
+                            <div class="date">Jan 14, 2020</div>
+                        </div>
+                        <div class="item">
+                            <div class="title">Design Studios That Everyone Should Know About? </div>
+                            <div class="date">Jan 14, 2020</div>
+                        </div>
+                        <div class="item">
+                            <div class="title">How did we get 1M+ visitors in 30 days without anything!</div>
+                            <div class="date">Jan 14, 2020</div>
+                        </div>
+                        <div class="item">
+                            <div class="title">Figma On Figma: How We Built Our Website Design System</div>
+                            <div class="date">Jan 14, 2020</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="categories">
+                    <div class="title">Categories</div>
+                    <div class="category">Technoligy<span>- 20 Posts</span></div>
+                    <div class="category">Freelancing<span>- 07 Posts</span></div>
+                    <div class="category">Writing<span>- 16 Posts</span></div>
+                    <div class="category">Marketing<span>- 11 Posts</span></div>
+                    <div class="category">Business<span>- 35 Posts</span></div>
+                    <div class="category">Education<span>- 14 Posts</span></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
